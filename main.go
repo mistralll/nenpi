@@ -40,7 +40,7 @@ func loadPageView(title string) (*Page, error) {
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
 	p, _ := vihicle.LoadVihicle(title)
-	t, _ := template.ParseFiles("view.html")
+	t, _ := template.ParseFiles("html/view.html")
 	t.Execute(w, p)
 }
 
@@ -53,7 +53,7 @@ func saveHanler(w http.ResponseWriter, r *http.Request) {
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[5:]
-	t, _ := template.ParseFiles("add.html")
+	t, _ := template.ParseFiles("html/add.html")
 	p := map[string]string{"Title": title}
 	t.Execute(w, p)
 }
