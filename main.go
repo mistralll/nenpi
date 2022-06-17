@@ -7,6 +7,7 @@ import (
 	"text/template"
 
 	"github.com/mistralll/goSrv/refueling"
+	"github.com/mistralll/goSrv/vihicle"
 )
 
 type Page struct {
@@ -38,7 +39,7 @@ func loadPageView(title string) (*Page, error) {
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
-	p, _ := loadPageView(title)
+	p, _ := vihicle.LoadVihicle(title)
 	t, _ := template.ParseFiles("view.html")
 	t.Execute(w, p)
 }
