@@ -4,7 +4,7 @@
     <form action="/save/{{.Title}}" method="POST">
         <tr>
             <td>DateTime</td>
-            <td><input name="datetime" type="datetime-local" id="dttm"></td>
+            <td><input name="datetime" type="datetime-local" id="datetime"></td>
         </tr>
         <tr>
             <td>ODO</td>
@@ -26,10 +26,10 @@
 
 <script>
     var d = new Date();
-    document.getElementById("dttm").value = convertDate(d);
+    document.getElementById("datetime").value = convertDate(d);
     function convertDate(d){
         return d.getFullYear() + '-' + (("0"+(d.getMonth() + 1)).slice(-2))+'-' + ("0"+d.getDate()).slice(-2)
         + 'T' + 
-        ("0"+d.getHours()).slice(-2)+':'+("0"+d.getMinutes()).slice(-2)+':'+("0"+d.getSeconds()).slice(-2);
+        ("0"+d.getHours()).slice(-2)+':'+("0"+d.getMinutes()).slice(-2)
     }
 </script>
