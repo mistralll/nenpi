@@ -4,22 +4,32 @@
     <form action="/save/{{.Title}}" method="POST">
         <tr>
             <td>DateTime</td>
-            <td><input name="datetime" type="datetime-local"></td>
+            <td><input name="datetime" type="datetime-local" id="dttm"></td>
         </tr>
         <tr>
             <td>ODO</td>
-            <td><input name="odo" type="number"></td>
+            <td><input name="odo" type="number" min="0" step="0.01"></td>
         </tr>
         <tr>
             <td>給油量</td>
-            <td><input name="fuel" type="number"></td>
+            <td><input name="fuel" type="number" min="0" step="0.001"></td>
         </tr>
         <tr>
             <td>給油総額</td>
-            <td><input name="total" type="number"></td>
+            <td><input name="total" type="number" min="0" step="1"></td>
         </tr>
         <div>
             <input type="submit" value="save">
         </div>
     </form>
 </html>
+
+<script>
+    var d = new Date();
+    document.getElementById("dttm").value = convertDate(d);
+    function convertDate(d){
+        return d.getFullYear() + '-' + (("0"+(d.getMonth() + 1)).slice(-2))+'-' + ("0"+d.getDate()).slice(-2)
+        + 'T' + 
+        ("0"+d.getHours()).slice(-2)+':'+("0"+d.getMinutes()).slice(-2)+':'+("0"+d.getSeconds()).slice(-2);
+    }
+</script>
