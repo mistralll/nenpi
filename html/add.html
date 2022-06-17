@@ -1,27 +1,35 @@
 <html>
-    <h1>add</h1>
-    <h2>{{.Title}}</h2>
-    <form action="/save/{{.Title}}" method="POST">
-        <tr>
-            <td>DateTime</td>
-            <td><input name="datetime" type="datetime-local" id="datetime"></td>
-        </tr>
-        <tr>
-            <td>ODO</td>
-            <td><input name="odo" type="number" min="0" step="0.01"></td>
-        </tr>
-        <tr>
-            <td>給油量</td>
-            <td><input name="fuel" type="number" min="0" step="0.001"></td>
-        </tr>
-        <tr>
-            <td>給油総額</td>
-            <td><input name="total" type="number" min="0" step="1"></td>
-        </tr>
-        <div>
-            <input type="submit" value="save">
-        </div>
-    </form>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    </head>
+    <body>
+        <h1>Refueling</h1>
+        <h2>{{.Title}}</h2>
+        <form action="/save/{{.Title}}" method="POST">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="input_datetime" type="datetime-local" id="datetime">
+                <label class="mdl-textfield__label" for="input_datetime">DateTime</label>
+            </div>
+            <div class="wrapper">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" name="odo" id="odo" type="number" min="0" step="0.01">
+                    <label class="mdl-textfield__label" for="odo">ODO</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" name="fuel" id="fuel" type="number" min="0" step="0.001">
+                    <label class="mdl-textfield__label" for="fuel">給油量</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" name="total" id="total" type="number" min="0" step="1">
+                    <label class="mdl-textfield__label" for="total">金額</label>
+                </div>
+            </div>
+
+            <input type="submit" value="save"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        </form>
+    </body>
 </html>
 
 <script>
@@ -33,3 +41,12 @@
         ("0"+d.getHours()).slice(-2)+':'+("0"+d.getMinutes()).slice(-2)
     }
 </script>
+
+<style>
+    .wrappr > div {
+        border-radius: 20px;
+        border: 5px;
+        padding: 1em;
+        flex: 1;
+    }
+</style>
