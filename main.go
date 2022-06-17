@@ -1,41 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"net/http"
-	"os"
 	"text/template"
 
 	"github.com/mistralll/goSrv/refueling"
 	"github.com/mistralll/goSrv/vihicle"
 )
-
-type Page struct {
-	Title string
-	Rows  []refueling.Refueling
-}
-
-func loadPageView(title string) (*Page, error) {
-	filename := title + ".csv"
-	fp, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-
-	var rows []refueling.Refueling
-	for scanner.Scan() {
-		line := scanner.Text()
-		row := refueling.StrToRefuel(line)
-		rows = append(rows, *row)
-	}
-
-	p := &Page{Title: title, Rows: rows}
-
-	return p, nil
-}
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
