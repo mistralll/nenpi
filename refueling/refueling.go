@@ -12,7 +12,7 @@ import (
 var layout = "2006/01/02 15:04:05"
 
 func (r *Refueling) SaveRefuel(title string) error {
-	filename := title + ".csv"
+	filename := "data/" + title + ".csv"
 	content := r.refuelToStr()
 	f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {

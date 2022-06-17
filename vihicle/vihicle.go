@@ -8,7 +8,7 @@ import (
 )
 
 func LoadVihicle(title string) (*Vihicle, error) {
-	filename := title + ".csv"
+	filename := "data/" + title + ".csv"
 	fp, err := os.Open(filename)
 	if err != nil {
 		fp, err = os.Create(filename)
