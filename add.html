@@ -1,0 +1,25 @@
+<html>
+    <h1>add</h1>
+    <h2>{{.Title}}</h2>
+    <form action="/save/{{.Title}}" method="POST">
+        <tr>
+            <td>DateTime</td>
+            <td><input name="datetime" type="datetime-local"></td>
+        </tr>
+        <tr>
+            <td>ODO</td>
+            <td><input name="odo" type="number"></td>
+        </tr>
+        <tr>
+            <td>給油量</td>
+            <td><input name="refueling" type="number"></td>
+        </tr>
+        <tr>
+            <td>給油総額</td>
+            <td><input name="total" type="number"></td>
+        </tr>
+        <div>
+            <input type="submit" value="save">
+        </div>
+    </form>
+</html>
