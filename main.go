@@ -2,17 +2,16 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"net/http"
 	"os"
 	"text/template"
 
-	"github.com/mistralll/goSrv/row"
+	"github.com/mistralll/goSrv/refueling"
 )
 
 type Page struct {
 	Title string
-	Rows  []row.Row
+	Rows  []refueling.Refueling
 }
 
 func loadPageView(title string) (*Page, error) {
@@ -25,18 +24,15 @@ func loadPageView(title string) (*Page, error) {
 
 	scanner := bufio.NewScanner(fp)
 
-	var rows []row.Row
+	var rows []refueling.Refueling
 	for scanner.Scan() {
 		line := scanner.Text()
-		r := row.StringToRow(line)
-		rows = append(rows, *r)
+		row := refueling.StrToRefuel(line)
+		rows = append(rows, *row)
 	}
 
 	p := &Page{Title: title, Rows: rows}
 
-	for _, v := range p.Rows {
-		fmt.Println(v)
-	}
 	return p, nil
 }
 
@@ -49,8 +45,8 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 
 func saveHanler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
-	row := row.HttprequesToRow(r)
-	row.SaveRow(title)
+	refuel := refueling.HttpReqToRefuel(r)
+	refuel.SaveRefuel(title)
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
