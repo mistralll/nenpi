@@ -11,7 +11,10 @@ func LoadVihicle(title string) (*Vihicle, error) {
 	filename := title + ".csv"
 	fp, err := os.Open(filename)
 	if err != nil {
-		return nil, err
+		fp, err = os.Create(filename)
+		if err != nil {
+			return nil, err
+		}
 	}
 	defer fp.Close()
 
