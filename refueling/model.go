@@ -9,7 +9,7 @@ type Refueling struct {
 	Total    int
 	// memo      string
 
-	// trip        float64
-	// unitPrice   int
-	// fuleMileage float64
+	Trip        float64
+	UnitPrice   int
+	FuelMileage float64
 }

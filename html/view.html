@@ -6,12 +6,18 @@
         <th>ODO</th>
         <th>給油量</th>
         <th>金額</th>
+        <th>Trip</th>
+        <th>ガソリン単価</th>
+        <th>燃費(km/L)</th>
         {{range .Refuelings}}
         <tr>
             <td>{{.Datetime}}</td>
             <td>{{.Odo}}</td>
             <td>{{.Fuel}}</td>
             <td>{{.Total}}</td>
+            <td>{{.Trip}}</td>
+            <td>{{.UnitPrice}}</td>
+            <td>{{.FuelMileage}}</td>
         </tr>
         {{end}}
     </table>
