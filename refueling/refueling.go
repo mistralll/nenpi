@@ -16,7 +16,11 @@ func (r *Refueling) SaveRefuel(title string) error {
 	content := r.refuelToStr()
 	f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
-		return err
+		f, err = os.Create(filename)
+		if err != nil {
+			return err
+		}
+		// f, err = os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0600)
 	}
 	defer f.Close()
 	fmt.Fprintln(f, content)
