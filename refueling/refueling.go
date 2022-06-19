@@ -19,6 +19,8 @@ func (r *Refueling) SaveRefuel(title string) error {
 	}
 	defer f.Close()
 
+	fmt.Println(r.Datetime.Format(layout))
+
 	r.calcRefuel(title)
 	content := r.refuelToStr()
 	fmt.Fprintln(f, content)

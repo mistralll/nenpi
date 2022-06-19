@@ -56,7 +56,7 @@ func StrToRefuel(str string) *Refueling {
 }
 
 func HttpReqToRefuel(r *http.Request) *Refueling {
-	date, _ := time.Parse("2006-01-02T15:04", r.FormValue("datetime"))
+	date, _ := time.Parse("2006-01-02T15:04", r.FormValue("input_datetime"))
 	odo, _ := strconv.ParseFloat(r.FormValue("odo"), 64)
 	fuel, _ := strconv.ParseFloat(r.FormValue("fuel"), 64)
 	total, _ := strconv.Atoi(r.FormValue("total"))
