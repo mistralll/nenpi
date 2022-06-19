@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    </head>
+    <body>
+        <h1>Edit</h1>
+        <h2>{{.Title}}</h2>
+        <form action="/saveicon/{{.Title}}" method="POST">
+            <input type="file" name="input_icon" accept=".png, .jpg, .jpeg">
+            <input type="submit" value="save"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        </form>
+    </body>
+</html>

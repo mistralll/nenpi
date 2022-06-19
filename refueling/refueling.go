@@ -18,7 +18,7 @@ func (r *Refueling) SaveRefuel(title string) error {
 		}
 	}
 	defer f.Close()
-	
+
 	r.calcRefuel(title)
 	content := r.refuelToStr()
 	fmt.Fprintln(f, content)

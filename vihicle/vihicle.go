@@ -2,6 +2,9 @@ package vihicle
 
 import (
 	"bufio"
+	"fmt"
+	"io"
+	"net/http"
 	"os"
 
 	"github.com/mistralll/nenpi/refueling"
@@ -30,4 +33,39 @@ func LoadVihicle(title string) (*Vihicle, error) {
 	p := &Vihicle{Title: title, Refuelings: rows}
 
 	return p, nil
+}
+
+func SaveIcon(r *http.Request, title string) error {
+	fmt.Println("vihicle.SaveIcon が呼ばれました")
+
+	if r.Method != "POST" {
+		return fmt.Errorf("method is not POST")
+	}
+
+	file, fileHeader, err := r.FormFile("input_icon")
+	if err != nil {
+		return err
+	}
+
+	uploadFileName := fileHeader.Filename
+
+	imagePath := "data/" + uploadFileName
+	// ここ後でtitle + 拡張子に変更する
+
+	saveImg, err := os.Create(imagePath)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(saveImg, file)
+	if err != nil {
+		return err
+	}
+
+	defer saveImg.Close()
+	defer file.Close()
+
+	fmt.Println("vihicle.SaveIcon が終了しました")
+
+	return nil
 }
