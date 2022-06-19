@@ -6,12 +6,13 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/mistralll/nenpi/refueling"
 )
 
 func LoadVihicle(title string) (*Vihicle, error) {
-	filename := "data/" + title + ".csv"
+	filename := "data/csv/" + title + ".csv"
 	fp, err := os.Open(filename)
 	if err != nil {
 		fp, err = os.Create(filename)
@@ -36,36 +37,31 @@ func LoadVihicle(title string) (*Vihicle, error) {
 }
 
 func SaveIcon(r *http.Request, title string) error {
-	fmt.Println("vihicle.SaveIcon が呼ばれました")
-
 	if r.Method != "POST" {
 		return fmt.Errorf("method is not POST")
 	}
 
-	file, fileHeader, err := r.FormFile("input_icon")
+	inFile, inFileHeader, err := r.FormFile("input_icon")
 	if err != nil {
 		return err
 	}
 
-	uploadFileName := fileHeader.Filename
+	filetype := filepath.Ext(inFileHeader.Filename)
 
-	imagePath := "data/" + uploadFileName
-	// ここ後でtitle + 拡張子に変更する
+	filePath := "data/img/" + title + filetype
 
-	saveImg, err := os.Create(imagePath)
+	newFile, err := os.Create(filePath)
 	if err != nil {
 		return err
 	}
 
-	_, err = io.Copy(saveImg, file)
+	_, err = io.Copy(newFile, inFile)
 	if err != nil {
 		return err
 	}
 
-	defer saveImg.Close()
-	defer file.Close()
-
-	fmt.Println("vihicle.SaveIcon が終了しました")
+	defer newFile.Close()
+	defer inFile.Close()
 
 	return nil
 }

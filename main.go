@@ -38,9 +38,7 @@ func saveHanler(w http.ResponseWriter, r *http.Request) {
 
 func saveiconHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[10:]
-
 	vihicle.SaveIcon(r, title)
-
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
