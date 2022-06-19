@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/mistralll/goSrv/refueling"
-	"github.com/mistralll/goSrv/vihicle"
+	"github.com/mistralll/nenpi/refueling"
+	"github.com/mistralll/nenpi/vihicle"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {

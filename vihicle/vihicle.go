@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"os"
 
-	"github.com/mistralll/goSrv/refueling"
+	"github.com/mistralll/nenpi/refueling"
 )
 
 func LoadVihicle(title string) (*Vihicle, error) {

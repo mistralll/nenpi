@@ -1,6 +1,6 @@
 package vihicle
 
-import "github.com/mistralll/goSrv/refueling"
+import "github.com/mistralll/nenpi/refueling"
 
 type Vihicle struct {
 	Title      string

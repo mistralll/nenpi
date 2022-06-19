@@ -1,3 +1,3 @@
-module github.com/mistralll/goSrv
+module github.com/mistralll/nenpi
 
 go 1.18
