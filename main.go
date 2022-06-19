@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"text/template"
 
@@ -29,6 +30,15 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
+func listHandler(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("html/list.html")
+	list, err := vihicle.GetVihicleList()
+	if err != nil {
+		log.Fatal(err)
+	}
+	t.Execute(w, list)
+}
+
 func saveHanler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
 	refuel := refueling.HttpReqToRefuel(r)
@@ -43,12 +53,13 @@ func saveiconHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/view/", viewHandler)
-	http.HandleFunc("/add/", addHandler)
-	http.HandleFunc("/edit/", editHandler)
+	http.HandleFunc("/view/", viewHandler) // 車体ごとの情報
+	http.HandleFunc("/add/", addHandler)   // 給油の追加ページ
+	http.HandleFunc("/edit/", editHandler) // 画像をアップロードするページ
+	http.HandleFunc("/list/", listHandler) // 車体一覧を表示
 
-	http.HandleFunc("/save/", saveHanler)
-	http.HandleFunc("/saveicon/", saveiconHandler)
+	http.HandleFunc("/save/", saveHanler)          // 給油情報の保存
+	http.HandleFunc("/saveicon/", saveiconHandler) // 画像の保存
 
 	http.ListenAndServe(":8080", nil)
 }

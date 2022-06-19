@@ -6,3 +6,7 @@ type Vihicle struct {
 	Title      string
 	Refuelings []refueling.Refueling
 }
+
+type Vihicles struct {
+	Vihicles []Vihicle
+}
