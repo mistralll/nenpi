@@ -45,10 +45,18 @@ func (r *Refueling) calcRefuel(title string) error {
 	if lastline != "" {
 		prev := StrToRefuel(lastline)
 		r.Trip = r.Odo - prev.Odo
-		r.FuelMileage = r.Trip / r.Fuel
+		if (r.Fuel > 0) {
+			r.FuelMileage = r.Trip / r.Fuel
+		} else {
+			r.FuelMileage = 0
+		}
 	}
 
-	r.UnitPrice = int(float64(r.Total) / r.Fuel)
+	if(r.Fuel > 0) {
+		r.UnitPrice = int(float64(r.Total) / r.Fuel)
+	} else {
+		r.UnitPrice = 0
+	}
 
 	return nil
 }
