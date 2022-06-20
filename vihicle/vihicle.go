@@ -34,9 +34,11 @@ func LoadVihicle(title string) (*Vihicle, error) {
 
 	sort.SliceStable(rows, func(i, j int) bool { return rows[i].Datetime.After(rows[j].Datetime) })
 
-	p := &Vihicle{Title: title, Refuelings: rows}
+	avgMileage := refueling.CalcAvgMileage(rows)
 
-	return p, nil
+	rt := &Vihicle{Title: title, AvgMileage: avgMileage, Refuelings: rows}
+
+	return rt, nil
 }
 
 func SaveIcon(r *http.Request, title string) error {
