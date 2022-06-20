@@ -61,5 +61,7 @@ func main() {
 	http.HandleFunc("/save/", saveHanler)          // 給油情報の保存
 	http.HandleFunc("/saveicon/", saveiconHandler) // 画像の保存
 
+	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("data/"))))
+
 	http.ListenAndServe(":8080", nil)
 }
