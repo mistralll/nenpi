@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
 
 	"github.com/mistralll/nenpi/refueling"
 )
@@ -30,6 +31,8 @@ func LoadVihicle(title string) (*Vihicle, error) {
 		row := refueling.StrToRefuel(line)
 		rows = append(rows, *row)
 	}
+
+	sort.SliceStable(rows, func(i, j int) bool { return rows[i].Datetime.After(rows[j].Datetime) })
 
 	p := &Vihicle{Title: title, Refuelings: rows}
 
