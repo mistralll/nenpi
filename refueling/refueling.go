@@ -3,6 +3,7 @@ package refueling
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 )
 
@@ -45,14 +46,14 @@ func (r *Refueling) calcRefuel(title string) error {
 	if lastline != "" {
 		prev := StrToRefuel(lastline)
 		r.Trip = r.Odo - prev.Odo
-		if (r.Fuel > 0) {
+		if r.Fuel > 0 {
 			r.FuelMileage = r.Trip / r.Fuel
 		} else {
 			r.FuelMileage = 0
 		}
 	}
 
-	if(r.Fuel > 0) {
+	if r.Fuel > 0 {
 		r.UnitPrice = int(float64(r.Total) / r.Fuel)
 	} else {
 		r.UnitPrice = 0
@@ -61,18 +62,19 @@ func (r *Refueling) calcRefuel(title string) error {
 	return nil
 }
 
-func CalcAvgMileage(list []Refueling) int64 {
-	var fuelSum int64 = 0
-	var tripSum int64 = 0
+func CalcAvgMileage(list []Refueling) float64 {
+	var fuelSum float64 = 0
+	var tripSum float64 = 0
 	for _, row := range list {
-			if row.Trip != 0 {
-			fuelSum += int64(row.Fuel)
-			tripSum += int64(row.Trip)
+		if row.Trip != 0 {
+			fuelSum += float64(row.Fuel)
+			tripSum += float64(row.Trip)
 		}
 	}
-	var ans int64 = 0
-	if(fuelSum > 0) {
+	var ans float64 = 0
+	if fuelSum > 0 {
 		ans = tripSum / fuelSum
+		ans = math.Round(ans*100) / 100
 	}
 	return ans
 }
