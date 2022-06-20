@@ -57,8 +57,10 @@ func CalcAvgMileage(list []Refueling) int64 {
 	var fuelSum int64 = 0
 	var tripSum int64 = 0
 	for _, row := range list {
-		fuelSum += int64(row.Fuel)
-		tripSum += int64(row.Trip)
+			if row.Trip != 0 {
+			fuelSum += int64(row.Fuel)
+			tripSum += int64(row.Trip)
+		}
 	}
 	var ans int64 = 0
 	if(fuelSum > 0) {
