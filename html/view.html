@@ -12,8 +12,8 @@
 
 
         <div class="vihicleInf">
-            <div class="item">
-                <image src="/resources/img/{{.Title}}.png"></image>
+            <div class="item vihicleImg">
+                <img style="width: 100%" src="/resources/img/{{.Title}}.png"></img>
             </div>
 
             <dic class="vihicleInfDetail">
@@ -25,6 +25,31 @@
                     <h3>Ave. km/L</h3>
                 </div>
             </dic>
+        </div>
+
+        <div class="nenpi_rows">
+            <div class="nenpi_row">
+                <div class="nenpi_row_nenpi">
+                    <div class="item">
+                        <p>{{.FuelMileage}}</p>
+                    </div>
+                </div>
+                <div class="nenpi_detail">
+                    <div class="nenpi_detail_upper">
+                        <div class="item">
+                            <p>{{.}}</p>
+                        </div>
+                    </div>
+                    <div class="nenpi_detail_lower">
+                        <div class="item">
+                            <p>{{.Odo}}</p>
+                        </div>
+                        <div class="item">
+                            <p>{{.Trip}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -62,5 +87,9 @@
     .vihicleInfDetail {
         display: flex;
         flex-direction: column;
+    }
+
+    .vihicleImg {
+        width: 50%;
     }
 </style>
