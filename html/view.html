@@ -27,52 +27,41 @@
             </dic>
         </div>
 
+        {{range .Refuelings}}
+
         <div class="nenpi_rows">
             <div class="nenpi_row">
                 <div class="nenpi_row_nenpi">
                     <div class="item">
-                        <p>{{.FuelMileage}}</p>
+                        <p>燃費: {{.FuelMileage}} km/L</p>
                     </div>
                 </div>
                 <div class="nenpi_detail">
                     <div class="nenpi_detail_upper">
                         <div class="item">
-                            <p>{{.}}</p>
+                            <p>給油量: {{.Fuel}} L</p>
+                        </div>
+                        <div class="item">
+                            <p>金額: {{.Total}} 円</p>
+                        </div>
+                        <div class="item">
+                            <p>単価: {{.UnitPrice}} 円/L</p>
                         </div>
                     </div>
                     <div class="nenpi_detail_lower">
                         <div class="item">
-                            <p>{{.Odo}}</p>
+                            <p>ODO: {{.Odo}} km</p>
                         </div>
                         <div class="item">
-                            <p>{{.Trip}}</p>
+                            <p>Trip: {{.Trip}} km</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        {{end}}
 
-        <table>
-            <th>DateTime</th>
-            <th>ODO</th>
-            <th>給油量</th>
-            <th>金額</th>
-            <th>Trip</th>
-            <th>ガソリン単価</th>
-            <th>燃費(km/L)</th>
-            {{range .Refuelings}}
-            <tr>
-                <td>{{.Datetime}}</td>
-                <td>{{.Odo}}</td>
-                <td>{{.Fuel}}</td>
-                <td>{{.Total}}</td>
-                <td>{{.Trip}}</td>
-                <td>{{.UnitPrice}}</td>
-                <td>{{.FuelMileage}}</td>
-            </tr>
-            {{end}}
-        </table>
         <button onclick="location.href='/add/{{.Title}}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
             <i class="material-icons">add</i>
         </button>
@@ -91,5 +80,31 @@
 
     .vihicleImg {
         width: 50%;
+    }
+
+    .nenpi_rows {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nenpi_row {
+        display: flex;
+    }
+
+    .nenpi_row_nenpi {
+        display: flex;
+    }
+
+    .nenpi_detail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nenpi_detail_upper {
+        display: flex;
+    }
+
+    .nenpi_detail_lower {
+        display: flex;
     }
 </style>
