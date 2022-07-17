@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="/resources/css/view.css" type="text/css">
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     </head>
     <body>
@@ -27,9 +28,10 @@
             </dic>
         </div>
 
-        {{range .Refuelings}}
+        
 
         <div class="nenpi_rows">
+            {{range .Refuelings}}
             <div class="nenpi_row">
                 <div class="nenpi_row_nenpi">
                     <div class="item">
@@ -58,53 +60,13 @@
                     </div>
                 </div>
             </div>
+            {{end}}
         </div>
 
-        {{end}}
+        
 
         <button onclick="location.href='/add/{{.Title}}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
             <i class="material-icons">add</i>
         </button>
-</body>
+    </body>
 </html>
-
-<style>
-    .vihicleInf {
-        display: flex;
-    }
-
-    .vihicleInfDetail {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .vihicleImg {
-        width: 50%;
-    }
-
-    .nenpi_rows {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nenpi_row {
-        display: flex;
-    }
-
-    .nenpi_row_nenpi {
-        display: flex;
-    }
-
-    .nenpi_detail {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nenpi_detail_upper {
-        display: flex;
-    }
-
-    .nenpi_detail_lower {
-        display: flex;
-    }
-</style>

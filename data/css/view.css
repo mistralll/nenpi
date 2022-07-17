@@ -1,0 +1,41 @@
+.vihicleInf {
+    display: flex;
+}
+
+.vihicleInfDetail {
+    display: flex;
+    flex-direction: column;
+}
+
+.vihicleImg {
+    width: 50%;
+}
+
+.nenpi_rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.nenpi_row {
+    display: flex;
+}
+
+.nenpi_row_nenpi {
+    display: flex;
+    width: 20%;
+    align-items: baseline;
+}
+
+.nenpi_detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.nenpi_detail_upper {
+    display: flex;
+}
+
+.nenpi_detail_lower {
+    display: flex;
+}
+
