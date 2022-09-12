@@ -4,10 +4,37 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
         <link rel="stylesheet" href="/resources/css/view.css" type="text/css">
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="!TODO icon image">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="NENP">
+        <link rel="apple-touch-icon-precomposed" href="!TODO icon image">
+
+
     </head>
     <body>
-    <!-- Navigation bar -->
+
+        <style>
+            #add-button {
+              position: fixed;
+              display: block;
+              right: 0;
+              bottom: 0;
+              margin-right: 40px;
+              margin-bottom: 40px;
+              z-index: 900;
+              
+            }
+        </style>
+        
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <!-- Navigation bar -->
             <header class="mdl-layout__header">
               <div class="mdl-layout__header-row">
                 <!-- Title -->
@@ -20,7 +47,8 @@
                 </nav>
               </div>
             </header>
-    <!--Drawer -->
+
+            <!--Drawer -->
             <div class="mdl-layout__drawer">
               <span class="mdl-layout-title">NENP</span>
               <nav class="mdl-navigation">
@@ -29,18 +57,55 @@
                 <a class="mdl-navigation__link" href="/list/">その他の車体</a>
               </nav>
             </div>
-    <!-- Contents -->
+
+            <!-- Contents -->
             <main class="mdl-layout__content">
               <div class="page-content">
 
+                <div class="mdl-grid">
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <thead>
+                        <tr>
+                            <th class=>燃費</th>
+                            <th class=>給油量</th>
+                            <th class=>金額</th>
+                            <th class=>単価</th>
+                            <th class=>TRIP</th>
+                            <th class=>ODO</th>
+                            <th class="mdl-data-table__cell--non-numeric">日時</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {{range .Refuelings}}
+                        <tr>
+                            <th class=>{{.FuelMileage}} km/L</th>
+                            <th class=>{{.Fuel}} L</th>
+                            <th class=>{{.Total}} 円</th>
+                            <th class=>{{.UnitPrice}} 円/L</th>
+                            <th class=>{{.Trip}} km</th>
+                            <th class=>{{.Odo}} km</th>
+                            <th class="mdl-data-table__cell--non-numeric">{{.Datetime}}</th>
+                        </tr>
+                        {{end}}
+
+                        </tbody>
+                    </table>
+                </div>
+                  
+                
 
 
               </div>
             </main>
           </div>
     
-
-
+    <!-- Add button -->
+        <button onclick='location.href="/add/{{.Title}}"' class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add-button">
+            <i class="material-icons">add</i>
+        </button>
+  
+<!--
         <div class="vihicleInf">
             <div class="item vihicleImg">
                 <img style="width: 100%" src="/resources/img/{{.Title}}.png"></img>
@@ -97,5 +162,8 @@
         <button onclick="location.href='/add/{{.Title}}'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
             <i class="material-icons">add</i>
         </button>
+    -->
+
+
     </body>
 </html>
