@@ -3,11 +3,11 @@ package vehicle
 import "github.com/mistralll/nenpi/refueling"
 
 type Vehicle struct {
-	Title         string
-	AvgMileage    float64
-	RefuelingRows []refueling.Refueling
+	Title              string                `json:"title"`
+	AvgFuelConsumption float64               `json:"avgFuelConsumption"`
+	RefuelingRows      []refueling.Refueling `json:"refuelingRows"`
 }
 
 type Vehicles struct {
-	Vehicles []Vehicle
+	Vehicles []Vehicle `json:"vehicles"`
 }

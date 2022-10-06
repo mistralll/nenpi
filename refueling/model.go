@@ -3,13 +3,12 @@ package refueling
 import "time"
 
 type Refueling struct {
-	Datetime time.Time
-	Odo      float64
-	Fuel     float64
-	Total    int
+	DateTime        time.Time `json:"dateTime"`
+	FuelConsumption float64   `json:"fuelConsumption"`
+	RefuelAmount    float64   `json:"refuelAmount"`
+	TotalCost       int       `json:"totalCost"`
+	UnitPrice       int       `json:"unitPrice"`
+	Odo             float64   `json:"odo"`
+	Trip            float64   `json:"trip"`
 	// memo      string
-
-	Trip        float64
-	UnitPrice   int
-	FuelMileage float64
 }

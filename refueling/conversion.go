@@ -8,14 +8,14 @@ import (
 )
 
 func (r *Refueling) refuelToStr() string {
-	d := r.Datetime
+	d := r.DateTime
 	date := d.Format(layout)
 	odo := strconv.FormatFloat(r.Odo, 'f', 2, 64)
-	fuel := strconv.FormatFloat(r.Fuel, 'f', 2, 64)
-	total := strconv.Itoa(r.Total)
+	fuel := strconv.FormatFloat(r.RefuelAmount, 'f', 2, 64)
+	total := strconv.Itoa(r.TotalCost)
 	trip := strconv.FormatFloat(r.Trip, 'f', 2, 64)
 	unit := strconv.Itoa(r.UnitPrice)
-	mileage := strconv.FormatFloat(r.FuelMileage, 'f', 2, 64)
+	mileage := strconv.FormatFloat(r.FuelConsumption, 'f', 2, 64)
 
 	rt := (date + "," + odo + "," + fuel + "," + total + "," + trip + "," + unit + "," + mileage)
 	return rt
@@ -51,7 +51,7 @@ func StrToRefuel(str string) *Refueling {
 		mileage, _ = strconv.ParseFloat(arr[6], 64)
 	}
 
-	rt := &Refueling{Datetime: date, Odo: odo, Fuel: fuel, Total: total, Trip: trip, UnitPrice: unit, FuelMileage: mileage}
+	rt := &Refueling{DateTime: date, Odo: odo, RefuelAmount: fuel, TotalCost: total, Trip: trip, UnitPrice: unit, FuelConsumption: mileage}
 	return rt
 }
 
@@ -61,5 +61,5 @@ func HttpReqToRefuel(r *http.Request) *Refueling {
 	fuel, _ := strconv.ParseFloat(r.FormValue("fuel"), 64)
 	total, _ := strconv.Atoi(r.FormValue("total"))
 
-	return &Refueling{Datetime: date, Odo: odo, Fuel: fuel, Total: total}
+	return &Refueling{DateTime: date, Odo: odo, RefuelAmount: fuel, TotalCost: total}
 }

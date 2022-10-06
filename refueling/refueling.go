@@ -20,7 +20,7 @@ func (r *Refueling) SaveRefuel(title string) error {
 	}
 	defer f.Close()
 
-	fmt.Println(r.Datetime.Format(layout))
+	fmt.Println(r.DateTime.Format(layout))
 
 	r.calcRefuel(title)
 	content := r.refuelToStr()
@@ -46,15 +46,15 @@ func (r *Refueling) calcRefuel(title string) error {
 	if lastline != "" {
 		prev := StrToRefuel(lastline)
 		r.Trip = r.Odo - prev.Odo
-		if r.Fuel > 0 {
-			r.FuelMileage = r.Trip / r.Fuel
+		if r.RefuelAmount > 0 {
+			r.FuelConsumption = r.Trip / r.RefuelAmount
 		} else {
-			r.FuelMileage = 0
+			r.FuelConsumption = 0
 		}
 	}
 
-	if r.Fuel > 0 {
-		r.UnitPrice = int(float64(r.Total) / r.Fuel)
+	if r.RefuelAmount > 0 {
+		r.UnitPrice = int(float64(r.TotalCost) / r.RefuelAmount)
 	} else {
 		r.UnitPrice = 0
 	}
@@ -67,7 +67,7 @@ func CalcAvgMileage(list []Refueling) float64 {
 	var tripSum float64 = 0
 	for _, row := range list {
 		if row.Trip != 0 {
-			fuelSum += float64(row.Fuel)
+			fuelSum += float64(row.RefuelAmount)
 			tripSum += float64(row.Trip)
 		}
 	}

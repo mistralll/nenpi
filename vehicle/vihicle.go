@@ -32,11 +32,11 @@ func LoadVehicleInf(title string) (*Vehicle, error) {
 		rows = append(rows, *row)
 	}
 
-	sort.SliceStable(rows, func(i, j int) bool { return rows[i].Datetime.After(rows[j].Datetime) })
+	sort.SliceStable(rows, func(i, j int) bool { return rows[i].DateTime.After(rows[j].DateTime) })
 
 	avgMileage := refueling.CalcAvgMileage(rows)
 
-	rt := &Vehicle{Title: title, AvgMileage: avgMileage, RefuelingRows: rows}
+	rt := &Vehicle{Title: title, AvgFuelConsumption: avgMileage, RefuelingRows: rows}
 
 	return rt, nil
 }
