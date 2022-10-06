@@ -1,4 +1,4 @@
-package vihicle
+package vehicle
 
 import (
 	"bufio"
@@ -12,7 +12,7 @@ import (
 	"github.com/mistralll/nenpi/refueling"
 )
 
-func LoadVihicle(title string) (*Vihicle, error) {
+func LoadVehicleInf(title string) (*Vehicle, error) {
 	filename := "data/csv/" + title + ".csv"
 	fp, err := os.Open(filename)
 	if err != nil {
@@ -36,7 +36,7 @@ func LoadVihicle(title string) (*Vihicle, error) {
 
 	avgMileage := refueling.CalcAvgMileage(rows)
 
-	rt := &Vihicle{Title: title, AvgMileage: avgMileage, Refuelings: rows}
+	rt := &Vehicle{Title: title, AvgMileage: avgMileage, RefuelingRows: rows}
 
 	return rt, nil
 }

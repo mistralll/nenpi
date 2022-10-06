@@ -1,11 +1,11 @@
-package vihicle
+package vehicle
 
 import (
 	"os"
 	"path/filepath"
 )
 
-func getVihicleListStr() ([]string, error) {
+func getVehicleListStr() ([]string, error) {
 	var files []string
 
 	root := "data/csv/"
@@ -16,8 +16,8 @@ func getVihicleListStr() ([]string, error) {
 		}
 
 		if !info.IsDir() {
-			fname := filepath.Base(path[:len(path)-len(filepath.Ext(path))])
-			files = append(files, fname)
+			fName := filepath.Base(path[:len(path)-len(filepath.Ext(path))])
+			files = append(files, fName)
 		}
 		return nil
 	})
@@ -29,23 +29,23 @@ func getVihicleListStr() ([]string, error) {
 	return files, nil
 }
 
-func GetVihicleList() (*Vihicles, error) {
-	list, err := getVihicleListStr()
+func GetVehicleList() (*Vehicles, error) {
+	list, err := getVehicleListStr()
 	if err != nil {
 		return nil, err
 	}
 
-	var vihicles []Vihicle
+	var vihicles []Vehicle
 
 	for _, v := range list {
-		row, err := LoadVihicle(v)
+		row, err := LoadVehicleInf(v)
 		if err != nil {
 			return nil, err
 		}
 		vihicles = append(vihicles, *row)
 	}
 
-	rt := &Vihicles{Vihicles: vihicles}
+	rt := &Vehicles{Vehicles: vihicles}
 
 	return rt, nil
 }

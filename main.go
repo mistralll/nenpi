@@ -1,17 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
 
 	"github.com/mistralll/nenpi/refueling"
-	"github.com/mistralll/nenpi/vihicle"
+	"github.com/mistralll/nenpi/vehicle"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
-	p, _ := vihicle.LoadVihicle(title)
+	p, _ := vehicle.LoadVehicleInf(title)
 	t, _ := template.ParseFiles("html/view.html")
 	t.Execute(w, p)
 }
@@ -32,24 +33,29 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 
 func listHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("html/list.html")
-	list, err := vihicle.GetVihicleList()
+	list, err := vehicle.GetVehicleList()
 	if err != nil {
 		log.Fatal(err)
 	}
 	t.Execute(w, list)
 }
 
-func saveHanler(w http.ResponseWriter, r *http.Request) {
+func saveHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[6:]
 	refuel := refueling.HttpReqToRefuel(r)
 	refuel.SaveRefuel(title)
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
-func saveiconHandler(w http.ResponseWriter, r *http.Request) {
+func saveIconHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[10:]
-	vihicle.SaveIcon(r, title)
+	vehicle.SaveIcon(r, title)
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
+}
+
+func getVehicleInfHandler(w http.ResponseWriter, r *http.Request) {
+	title := r.URL.Path[15:]
+	fmt.Println(title)
 }
 
 func main() {
@@ -58,8 +64,8 @@ func main() {
 	http.HandleFunc("/edit/", editHandler) // 画像をアップロードするページ
 	http.HandleFunc("/list/", listHandler) // 車体一覧を表示
 
-	http.HandleFunc("/save/", saveHanler)          // 給油情報の保存
-	http.HandleFunc("/saveicon/", saveiconHandler) // 画像の保存
+	http.HandleFunc("/save/", saveHandler)          // 給油情報の保存
+	http.HandleFunc("/saveicon/", saveIconHandler) // 画像の保存
 
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("data/"))))
 
