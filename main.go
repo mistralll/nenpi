@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -53,9 +54,22 @@ func saveIconHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
 
-func getVehicleInfHandler(w http.ResponseWriter, r *http.Request) {
-	title := r.URL.Path[15:]
+func vehicleInfHandler(w http.ResponseWriter, r *http.Request) {
+	title := r.URL.Path[12:]
 	fmt.Println(title)
+
+	vehicleInf, err := vehicle.LoadVehicleInf(title)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	res, err := json.Marshal(vehicleInf)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }
 
 func main() {
@@ -66,6 +80,8 @@ func main() {
 
 	http.HandleFunc("/save/", saveHandler)          // 給油情報の保存
 	http.HandleFunc("/saveicon/", saveIconHandler) // 画像の保存
+
+	http.HandleFunc("/vehicleInf/", vehicleInfHandler)
 
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("data/"))))
 
