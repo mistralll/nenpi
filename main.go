@@ -56,7 +56,6 @@ func saveIconHandler(w http.ResponseWriter, r *http.Request) {
 
 func vehicleInfHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[12:]
-	fmt.Println(title)
 
 	vehicleInf, err := vehicle.LoadVehicleInf(title)
 	if err != nil {
@@ -72,18 +71,26 @@ func vehicleInfHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+
+}
+
 func main() {
 	http.HandleFunc("/view/", viewHandler) // 車体ごとの情報
 	http.HandleFunc("/add/", addHandler)   // 給油の追加ページ
 	http.HandleFunc("/edit/", editHandler) // 画像をアップロードするページ
 	http.HandleFunc("/list/", listHandler) // 車体一覧を表示
 
-	http.HandleFunc("/save/", saveHandler)          // 給油情報の保存
+	http.HandleFunc("/save/", saveHandler)         // 給油情報の保存
 	http.HandleFunc("/saveicon/", saveIconHandler) // 画像の保存
 
 	http.HandleFunc("/vehicleInf/", vehicleInfHandler)
 
+	http.Handle("/html/", http.StripPrefix("/html/", http.FileServer(http.Dir("html"))))
+
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("data/"))))
 
 	http.ListenAndServe(":8080", nil)
+
+	fmt.Println("Listening...")
 }
