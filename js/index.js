@@ -1,4 +1,4 @@
 $(document).ready(function(){
-    const title = getParam('title')
-    console.log(title)
+    const title = location.search;
+    console.log(title);
 });

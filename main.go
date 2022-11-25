@@ -87,6 +87,8 @@ func main() {
 	http.HandleFunc("/vehicleInf/", vehicleInfHandler)
 
 	http.Handle("/html/", http.StripPrefix("/html/", http.FileServer(http.Dir("html"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
 
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("data/"))))
 
